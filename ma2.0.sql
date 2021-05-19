@@ -101,3 +101,19 @@ constraint fk_prog_fich foreign key (id_programa)references programa (id),
 constraint fk_esfi_fich foreign key (id_estado_ficha)references estado_ficha (id),
 constraint fk_jorn_fich foreign key (id_jornada)references jornada (id)
 )
+create table estado_ficha(
+id int not null primary key,
+nombre_estado varchar (20)not null,
+estado int not null,
+constraint uk_nombre_estado unique (nombre_estado)
+)
+create table jornada (
+id int not null primary key,
+	sigla _jornada varchar (20)not null,
+	nombre_jornada varchar(40)not null,
+	describcion varchar (100)not null,
+	imagen_url varchar (1000),
+	estado varchar (40)not null,
+	constraint uk_sigla_jornada unique (sigla_jornada),
+	constraint uk_nombre_jornada unique (nombre_jornada)
+)
