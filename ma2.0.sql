@@ -66,3 +66,38 @@ create table log_auditoria(
     constraint fk_clie_log_audi foreign key (id_cliente)references cliente(id)
 
 )
+create table estado_formacion (
+   id int not null primary key,
+	nombre_estado varchar(40)not null,
+	estado varchar(40)not null,
+	constraint uk_nombre_estado unique (nombre_estado)
+	
+	
+	
+	
+)
+create table aprendiz(
+    id int not null primary key,
+	id_cliente int not null,
+	id_ficha int not null ,
+	id_estado_formacion int not null,
+	constraint uk_aprendiz unique (id_cliente),
+	constraint uk_apremdiz_ unique(id_ficha)
+    constraint fk_esta_apre foreign key (id_cliente)references cliente (id),
+	constraint fk_fich_apre foreign key (id_ficha)references ficha(id),
+	constraint fk_esta_apre foreign key (id_estado_formacion)references estado_formacion (id)
+)
+create table ficha (
+id int primary key not null,
+id_programa int not null,
+numero_ficha varchar (100)not null 
+fecha_inicio date not null,
+fecha_fin date no null,
+ruta varchar (40)not null,
+id_estado_ficha int not null,
+id_jornada int not null,
+constraint uk_ficha unique(numero_ficha),
+constraint fk_prog_fich foreign key (id_programa)references programa (id),
+constraint fk_esfi_fich foreign key (id_estado_ficha)references estado_ficha (id),
+constraint fk_jorn_fich foreign key (id_jornada)references jornada (id)
+)
