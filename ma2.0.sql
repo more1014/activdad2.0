@@ -72,27 +72,29 @@ create table estado_formacion (
 	estado varchar(40)not null,
 	constraint uk_nombre_estado unique (nombre_estado)
 	
-	
-	
-	
 )
+
+
+
+
+
 create table aprendiz(
     id int not null primary key,
 	id_cliente int not null,
 	id_ficha int not null ,
 	id_estado_formacion int not null,
 	constraint uk_aprendiz unique (id_cliente),
-	constraint uk_apremdiz_ unique(id_ficha)
+	constraint uk_apremdiz_ unique(id_ficha),
     constraint fk_esta_apre foreign key (id_cliente)references cliente (id),
 	constraint fk_fich_apre foreign key (id_ficha)references ficha(id),
-	constraint fk_esta_apre foreign key (id_estado_formacion)references estado_formacion (id)
+	constraint fk_esta_apre_ foreign key (id_estado_formacion)references estado_formacion (id)
 )
 create table ficha (
 id int primary key not null,
 id_programa int not null,
-numero_ficha varchar (100)not null 
+numero_ficha varchar (100)not null, 
 fecha_inicio date not null,
-fecha_fin date no null,
+fecha_fin date not null,
 ruta varchar (40)not null,
 id_estado_ficha int not null,
 id_jornada int not null,
@@ -105,11 +107,11 @@ create table estado_ficha(
 id int not null primary key,
 nombre_estado varchar (20)not null,
 estado int not null,
-constraint uk_nombre_estado unique (nombre_estado)
+constraint uk_nombre_estado_ unique (nombre_estado)
 )
 create table jornada (
 id int not null primary key,
-	sigla _jornada varchar (20)not null,
+	sigla_jornada varchar (20)not null,
 	nombre_jornada varchar(40)not null,
 	describcion varchar (100)not null,
 	imagen_url varchar (1000),
@@ -117,3 +119,26 @@ id int not null primary key,
 	constraint uk_sigla_jornada unique (sigla_jornada),
 	constraint uk_nombre_jornada unique (nombre_jornada)
 )
+
+
+
+
+create table nivel_formacion(
+id int not null primary key,
+	nivel varchar (40)not null,
+	estado varchar (40)not null,
+	constraint uk_nivel unique (nivel)
+)
+create table programa(
+id int not null primary key,
+	codigo varchar (50)not null,
+	version varchar (40)not null,
+	nombre varchar (500)not null,
+	sigla varchar (40)not null,
+	estado varchar (40)not null,
+	id_nivel_formacion int not null,
+	constraint uk_programa unique (codigo,version),
+	constraint fk_nifo_prog foreign key (id_nivel_formacion)references nivel_formacion(id)
+	
+) 
+
